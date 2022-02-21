@@ -98,6 +98,13 @@ public class EasyReflect {
 
         }
 
+        public Builder withClasses(final List<Class<?>> classes) {
+
+            easyReflect.classes.addAll(classes);
+            return this;
+
+        }
+
         public EasyReflect build() {
 
             return easyReflect;
