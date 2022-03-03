@@ -85,15 +85,19 @@ public class EasyReflect {
 
     }
 
+    public List<Class<?>> getClasses() {
+
+        return new ArrayList<>(classes);
+
+    }
+
     public static class Builder {
 
         private final EasyReflect easyReflect = new EasyReflect();
 
-        public Builder withPackageName(final String packageName) {
+        public Builder resolvePackageName(final ClassLoader classLoader, final String packageName) {
 
-            final List<Class<?>> foundClasses = ReflectionHelper.getPackageClasses(packageName);
-            if (foundClasses != null) easyReflect.classes.addAll(foundClasses);
-
+            easyReflect.classes.addAll(ReflectionHelper.getPackageClassesRecursive(classLoader, packageName));
             return this;
 
         }
