@@ -95,9 +95,9 @@ public class EasyReflect {
 
         private final EasyReflect easyReflect = new EasyReflect();
 
-        public Builder resolvePackageName(final ClassLoader classLoader, final String packageName) {
+        public Builder resolvePackageName(final ClassLoader classLoader, final String packageName, final String... ignoredPackageNames) {
 
-            easyReflect.classes.addAll(ReflectionHelper.getPackageClassesRecursive(classLoader, packageName));
+            easyReflect.classes.addAll(ReflectionHelper.getPackageClassesRecursive(classLoader, packageName, ignoredPackageNames));
             return this;
 
         }

@@ -5,11 +5,11 @@ import java.util.List;
 
 public class ReflectionHelper {
 
-    public static List<Class<?>> getPackageClassesRecursive(final ClassLoader classLoader, final String packageName) {
+    public static List<Class<?>> getPackageClassesRecursive(final ClassLoader classLoader, final String packageName, final String... ignoredPackageNames) {
 
         final List<Class<?>> classes = new ArrayList<>();
 
-        final ClassLoaderResolver classLoaderResolver = new ClassLoaderResolver(classLoader);
+        final ClassLoaderResolver classLoaderResolver = new ClassLoaderResolver(classLoader, ignoredPackageNames);
         final boolean status = classLoaderResolver.resolve();
 
         if (!status) return classes;
