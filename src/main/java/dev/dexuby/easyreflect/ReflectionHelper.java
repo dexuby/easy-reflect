@@ -1,11 +1,19 @@
 package dev.dexuby.easyreflect;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ReflectionHelper {
 
-    public static List<Class<?>> getPackageClassesRecursive(final ClassLoader classLoader, final String packageName, final String... ignoredPackageNames) {
+    public static List<Class<?>> getPackageClassesRecursive(final ClassLoader classLoader, final String packageName) {
+
+        return getPackageClassesRecursive(classLoader, packageName, new HashSet<>());
+
+    }
+
+    public static List<Class<?>> getPackageClassesRecursive(final ClassLoader classLoader, final String packageName, final Set<String> ignoredPackageNames) {
 
         final List<Class<?>> classes = new ArrayList<>();
 

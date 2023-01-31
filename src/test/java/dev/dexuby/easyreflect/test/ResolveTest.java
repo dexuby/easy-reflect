@@ -15,7 +15,8 @@ public class ResolveTest {
     public void testIgnoredResolving() {
 
         final EasyReflect easyReflect = new EasyReflect.Builder()
-                .resolvePackageName(ClassLoader.getSystemClassLoader(), "dev.dexuby.easyreflect.test", "dev.dexuby.easyreflect.test.test.sub")
+                .ignoredPackage("dev.dexuby.easyreflect.test.test.sub")
+                .resolvePackage(ClassLoader.getSystemClassLoader(), "dev.dexuby.easyreflect.test")
                 .build();
 
         final Map<Class<?>, TestAnnotation> results = easyReflect.findAnnotatedClasses(TestAnnotation.class);

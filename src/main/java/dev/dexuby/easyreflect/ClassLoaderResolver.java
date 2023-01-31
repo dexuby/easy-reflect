@@ -20,30 +20,31 @@ public class ClassLoaderResolver {
     private final List<String> resolvedClassPaths = new ArrayList<>();
 
     private final ClassLoader classLoader;
-    private final Set<String> ignoredPackageNames = new HashSet<>();
+    private final Set<String> ignoredPackages;
 
     public ClassLoaderResolver(final ClassLoader classLoader) {
 
         this.classLoader = classLoader;
+        this.ignoredPackages = new HashSet<>();
 
     }
 
-    public ClassLoaderResolver(final ClassLoader classLoader, final String... packageNames) {
+    public ClassLoaderResolver(final ClassLoader classLoader, final Set<String> ignoredPackages) {
 
         this.classLoader = classLoader;
-        this.ignoredPackageNames.addAll(Arrays.asList(packageNames));
+        this.ignoredPackages = ignoredPackages;
 
     }
 
     public void addIgnoredPackageName(final String packageName) {
 
-        this.ignoredPackageNames.add(packageName);
+        this.ignoredPackages.add(packageName);
 
     }
 
     public void addIgnoredPackageNames(final String... packageNames) {
 
-        this.ignoredPackageNames.addAll(Arrays.asList(packageNames));
+        this.ignoredPackages.addAll(Arrays.asList(packageNames));
 
     }
 
@@ -91,7 +92,7 @@ public class ClassLoaderResolver {
         for (final String classPath : getClassPaths()) {
             final String className = ReflectionHelper.getClassName(classPath);
             if (className.startsWith(packageName) &&
-                    !this.ignoredPackageNames.contains(ReflectionHelper.getPackageName(className)))
+                    !this.ignoredPackages.contains(ReflectionHelper.getPackageName(className)))
                 filteredPaths.add(classPath);
         }
 
