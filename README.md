@@ -13,3 +13,18 @@ final Map<Class<?>, ExampleAnnotation> results = easyReflect.findAnnotatedClasse
 final ExampleAnnotation exampleAnnotation = results.get(Example.class);
 assertEquals("exampleStringValue", exampleAnnotation.value())
 ```
+
+```xml
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+	<url>https://jitpack.io</url>
+  </repository>
+</repositories>
+
+<dependency>
+  <groupId>com.github.dexuby</groupId>
+  <artifactId>EasyReflect</artifactId>
+  <version>...</version>
+</dependency>
+```
