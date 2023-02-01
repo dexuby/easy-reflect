@@ -16,15 +16,15 @@ assertEquals("exampleStringValue", exampleAnnotation.value())
 
 ```xml
 <repositories>
-  <repository>
-    <id>jitpack.io</id>
+    <repository>
+        <id>jitpack.io</id>
 	<url>https://jitpack.io</url>
-  </repository>
+    </repository>
 </repositories>
 
 <dependency>
-  <groupId>com.github.dexuby</groupId>
-  <artifactId>EasyReflect</artifactId>
-  <version>...</version>
+    <groupId>com.github.dexuby</groupId>
+    <artifactId>EasyReflect</artifactId>
+    <version>...</version>
 </dependency>
 ```
