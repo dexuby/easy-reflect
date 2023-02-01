@@ -11,10 +11,6 @@ public class EasyReflect {
     private final List<Class<?>> classes = new ArrayList<>();
     private final Set<String> ignoredPackages = new HashSet<>();
 
-    private EasyReflect() {
-
-    }
-
     /**
      * Used to find all classes in all resolved classes of the current instance that are annotated with the provided
      * annotation.
@@ -121,6 +117,18 @@ public class EasyReflect {
         }
 
         return foundFields;
+
+    }
+
+    /**
+     * Used to ignore the provided package.
+     *
+     * @param ignoredPackage The name of the package.
+     */
+
+    public void ignorePackage(final String ignoredPackage) {
+
+        this.ignoredPackages.add(ignoredPackage);
 
     }
 
