@@ -1,5 +1,7 @@
 ## EasyReflect
 
+[![](https://jitpack.io/v/dexuby/EasyReflect.svg)](https://jitpack.io/#dexuby/EasyReflect)
+
 Example usage:
 ```java
 final EasyReflect easyReflect = new EasyReflect.Builder()
