@@ -5,8 +5,9 @@
 Example usage:
 ```java
 final EasyReflect easyReflect = EasyReflect.builder()
+    .classLoader(ClassLoader.getSystemClassLoader())
     .ignoredPackage("com.example.project.external")
-    .resolvePackage(ClassLoader.getSystemClassLoader(), "com.example.project")
+    .resolvePackage("com.example.project")
     .build();
     
 final Map<Class<?>, ExampleAnnotation> results = easyReflect.findAnnotatedClasses(ExampleAnnotation.class);
