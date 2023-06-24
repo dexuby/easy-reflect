@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dev.dexuby</groupId>
-    <artifactId>easyreflect</artifactId>
+    <artifactId>easy-reflect</artifactId>
     <name>EasyReflect</name>
     <version>1.0.3</version>
 

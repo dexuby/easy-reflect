@@ -157,20 +157,37 @@ public class EasyReflect {
 
     }
 
+    public static EasyReflect.Builder builder() {
+
+        return new EasyReflect.Builder();
+
+    }
+
     public static class Builder {
 
-        private final EasyReflect easyReflect = new EasyReflect();
+        private final List<String> targetPackages = new LinkedList<>();
+        private final List<String> ignoredPackages = new LinkedList<>();
+        private final List<Class<?>> preResolvedClasses = new LinkedList<>();
 
-        public Builder resolvePackage(final ClassLoader classLoader, final String packageName) {
+        private ClassLoader classLoader;
 
-            easyReflect.resolvePackage(classLoader, packageName);
+        public Builder classLoader(final ClassLoader classLoader) {
+
+            this.classLoader = classLoader;
+            return this;
+
+        }
+
+        public Builder resolvePackage(final String packageName) {
+
+            this.targetPackages.add(packageName);
             return this;
 
         }
 
         public Builder ignoredPackages(final String... ignoredPackages) {
 
-            easyReflect.ignoredPackages.addAll(Arrays.asList(ignoredPackages));
+            this.ignoredPackages.addAll(Arrays.asList(ignoredPackages));
             return this;
 
         }
@@ -178,33 +195,49 @@ public class EasyReflect {
         public Builder ignoredPackages(final Package... ignoredPackages) {
 
             for (final Package ignoredPackage : ignoredPackages)
-                easyReflect.ignoredPackages.add(ignoredPackage.getName());
+                this.ignoredPackages.add(ignoredPackage.getName());
             return this;
 
         }
 
         public Builder ignoredPackage(final String ignoredPackage) {
 
-            easyReflect.ignoredPackages.add(ignoredPackage);
+            this.ignoredPackages.add(ignoredPackage);
             return this;
 
         }
 
         public Builder ignoredPackage(final Package ignoredPackage) {
 
-            easyReflect.ignoredPackages.add(ignoredPackage.getName());
+            this.ignoredPackages.add(ignoredPackage.getName());
+            return this;
+
+        }
+
+        public Builder preResolvedClass(final Class<?> clazz) {
+
+            this.preResolvedClasses.add(clazz);
             return this;
 
         }
 
         public Builder preResolvedClasses(final List<Class<?>> classes) {
 
-            easyReflect.classes.addAll(classes);
+            this.preResolvedClasses.addAll(classes);
             return this;
 
         }
 
         public EasyReflect build() {
+
+            if (this.classLoader == null)
+                this.classLoader = ClassLoader.getSystemClassLoader();
+
+            final EasyReflect easyReflect = new EasyReflect();
+            easyReflect.classes.addAll(this.preResolvedClasses);
+            easyReflect.ignoredPackages.addAll(this.ignoredPackages);
+            for (final String targetPackage : this.targetPackages)
+                easyReflect.resolvePackage(this.classLoader, targetPackage);
 
             return easyReflect;
 
