@@ -27,7 +27,7 @@ assertEquals("exampleStringValue", exampleAnnotation.value())
 
 <dependency>
     <groupId>com.github.dexuby</groupId>
-    <artifactId>EasyReflect</artifactId>
+    <artifactId>easy-reflect</artifactId>
     <version>...</version>
 </dependency>
 ```
