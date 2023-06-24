@@ -9,6 +9,8 @@ final EasyReflect easyReflect = EasyReflect.builder()
     .ignoredPackage("com.example.project.external")
     .resolvePackage("com.example.project")
     .build();
+
+easyReflect.resolvePackage(ClassLoader.getSystemClassLoader(), "com.example.external");
     
 final Map<Class<?>, ExampleAnnotation> results = easyReflect.findAnnotatedClasses(ExampleAnnotation.class);
 final ExampleAnnotation exampleAnnotation = results.get(Example.class);
