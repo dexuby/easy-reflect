@@ -4,7 +4,7 @@
 
 Example usage:
 ```java
-final EasyReflect easyReflect = new EasyReflect.Builder()
+final EasyReflect easyReflect = EasyReflect.builder()
     .ignoredPackage("com.example.project.external")
     .resolvePackage(ClassLoader.getSystemClassLoader(), "com.example.project")
     .build();
