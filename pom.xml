@@ -7,7 +7,7 @@
     <groupId>dev.dexuby</groupId>
     <artifactId>easy-reflect</artifactId>
     <name>EasyReflect</name>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
