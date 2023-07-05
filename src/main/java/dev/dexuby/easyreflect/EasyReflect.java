@@ -165,9 +165,9 @@ public class EasyReflect {
 
     public static class Builder {
 
-        private final List<String> targetPackages = new LinkedList<>();
-        private final List<String> ignoredPackages = new LinkedList<>();
-        private final List<Class<?>> preResolvedClasses = new LinkedList<>();
+        private final List<String> targetPackages = new ArrayList<>();
+        private final List<String> ignoredPackages = new ArrayList<>();
+        private final List<Class<?>> preResolvedClasses = new ArrayList<>();
 
         private ClassLoader classLoader;
 
