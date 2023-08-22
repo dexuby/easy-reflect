@@ -107,18 +107,45 @@ public class ClassLoaderResolver {
         if (parentClassLoader != null)
             entries.putAll(getClassPathEntries(parentClassLoader));
 
-        if (classLoader instanceof URLClassLoader) {
-            final URLClassLoader urlClassLoader = (URLClassLoader) classLoader;
-            final URL[] urls = urlClassLoader.getURLs();
-            for (final URL url : urls) {
-                if (!url.getProtocol().equals("file")) continue;
-                final File file = new File(url.getFile());
-                if (!entries.containsKey(file))
-                    entries.put(file, classLoader);
-            }
+        for (final URL url : getClassLoaderUrls(classLoader)) {
+            if (!url.getProtocol().equals("file")) continue;
+            final File file = new File(url.getFile());
+            if (!entries.containsKey(file))
+                entries.put(file, classLoader);
         }
 
         return entries;
+
+    }
+
+    private List<URL> getClassLoaderUrls(final ClassLoader classLoader) {
+
+        if (classLoader instanceof URLClassLoader) {
+            return Arrays.asList(((URLClassLoader) classLoader).getURLs());
+        } else if (classLoader.equals(ClassLoader.getSystemClassLoader())) {
+            return parseJavaClassPath();
+        } else {
+            return Collections.emptyList();
+        }
+
+    }
+
+    private List<URL> parseJavaClassPath() {
+
+        final List<URL> urls = new ArrayList<>();
+        for (final String entry : System.getProperty("java.class.path").split(System.getProperty("path.separator"))) {
+            try {
+                try {
+                    urls.add(new File(entry).toURI().toURL());
+                } catch (final SecurityException ex) {
+                    urls.add(new URL("file", null, new File(entry).getAbsolutePath()));
+                }
+            } catch (final MalformedURLException ex) {
+                //
+            }
+        }
+
+        return urls;
 
     }
 
